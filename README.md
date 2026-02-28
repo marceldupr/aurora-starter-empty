@@ -2,6 +2,10 @@
 
 Minimal Next.js App Router project with Aurora SDK. Add drop-in components and build your custom storefront.
 
+**Aurora** is an all-in-one, no-code platform for stores, marketplaces, CRMs, and more. Design your data, generate your app, automate workflows. Ship in hours, not months.
+
+[**Sign up for Aurora**](https://aurora.mandeville.digital) — currently in beta testing and free.
+
 ## Setup
 
 1. Copy `.env.example` to `.env.local`
