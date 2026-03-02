@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@aurora-studio/sdk':
-        specifier: 0.2.5
-        version: 0.2.5
+        specifier: 0.2.6
+        version: 0.2.6
       next:
         specifier: 15.0.7
         version: 15.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -55,8 +55,8 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@aurora-studio/sdk@0.2.5':
-    resolution: {integrity: sha512-EpK/olV0Kw3ydFyy0XvawlTiw7cZCSypeNVP8Ld0XB128phfnRo00fn+OqR9afk9jOM6W5T+Jc+0tgbjoAJhzg==}
+  '@aurora-studio/sdk@0.2.6':
+    resolution: {integrity: sha512-uy+e7M+u149825KOYm2jVpZHKdCWsFsTGEVyDbvlc+amuFgjw1VfSU++PdPzRIZ5ZQDBCOOUVS17mS+wmYWm5w==}
     engines: {node: '>=18'}
 
   '@emnapi/core@1.8.1':
@@ -1793,7 +1793,7 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@aurora-studio/sdk@0.2.5': {}
+  '@aurora-studio/sdk@0.2.6': {}
 
   '@emnapi/core@1.8.1':
     dependencies:
