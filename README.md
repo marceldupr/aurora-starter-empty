@@ -103,10 +103,10 @@ const caps = await client.capabilities();
 
 | Method | Description |
 | ------ | ----------- |
-| `client.store.homePersonalization(sessionId)` | Holmes-driven home (hero + sections, `quickActions`, `missions`, `shoppingListTemplates`). |
+| `client.store.homePersonalization(sessionId)` | Holmes-driven home (hero + sections, `quickActions`, `missions`, `shoppingListTemplates`). Returns `activeMission` when inference ≥ 0.6: `{ key, label, confidence, band, summary, uiHints }` — use for mission bar, catalogue narrowing. |
 | `client.store.holmesRecipe(slug)` | Cached recipe; AI fetch on miss. |
 | `client.store.holmesTidbits(entity, entityType?)` | Tidbits for recipes, ingredients, products. |
-| `client.store.holmesContextualHint({ sid, cartNames, currentProduct })` | "Paying attention" hint + product links. |
+| `client.store.holmesContextualHint({ sid, cartNames, currentProduct })` | "Paying attention" hint + product links. Guardrail rules (e.g. stir-fry + spaghetti → egg noodles) power micro-learning insights. |
 | `client.store.categorySuggestions(sid)` | Holmes-driven category order. |
 | `client.store.holmesRecipeProducts(recipe, limit?)` | Products for a recipe (paella, curry, pasta). |
 | `client.store.holmesGoesWith(productId, limit?)` | Products that go well with a given product. |
@@ -145,6 +145,36 @@ await client.store.checkout.sessions.create({
 | Export | Description |
 | ------ | ----------- |
 | `getHolmesScriptUrl(apiBase, tenantSlug)` | Standalone helper for Holmes script URL. Use at build/render time. |
+
+---
+
+## Intent-first How-tos
+
+### Active Mission Bar
+
+When `homePersonalization(sessionId)` returns `activeMission` (confidence ≥ 0.6), show a mission bar:
+
+```ts
+const home = await client.store.homePersonalization(sessionId);
+if (home.activeMission) {
+  // Render bar: home.activeMission.label, .confidence, .band, .summary
+  // uiHints: emphasizeMissions, narrowCatalog, showMissionBar
+}
+```
+
+Use `sessionStorage` + events for dismiss state so catalogue can restore full categories when dismissed.
+
+### Mission-first Command Surface
+
+Put mission chips ("Start here") first, search second. Headline: "What are you trying to do?" Use `missions` from home personalization for chips; `activeMission.uiHints.emphasizeMissions` when Holmes wants missions prominent.
+
+### Catalogue Narrowing
+
+When `activeMission.uiHints.narrowCatalog` is true and mission bar not dismissed, reorder categories by mission priority and add a "For your mission" section. See `aurora-starter-ecom` for `mission-catalogue-config` and `CatalogueFilters` integration.
+
+### Guardrail Rules
+
+Contextual hints use guardrail rules first (e.g. stir-fry + spaghetti → suggest egg noodles + insight). No extra API calls; `holmesContextualHint` returns rule-based hints when cart matches rules.
 
 ---
 
