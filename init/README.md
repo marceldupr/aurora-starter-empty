@@ -1,4 +1,4 @@
-# Init — first-run (optional)
+# Init - first-run (optional)
 
 This folder is for **first-run setup** when your app needs to provision an Aurora schema.
 

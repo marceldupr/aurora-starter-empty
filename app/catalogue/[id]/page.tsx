@@ -43,7 +43,7 @@ export default async function ProductPage({
               <img src={imageUrl} alt="" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-slate-500 text-6xl">
-                —
+                 - 
               </div>
             )}
           </div>

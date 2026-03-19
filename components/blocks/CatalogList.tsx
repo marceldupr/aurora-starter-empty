@@ -98,7 +98,7 @@ export async function CatalogList({
                   <img src={imageUrl} alt="" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-500">
-                    —
+                     - 
                   </div>
                 )}
               </div>
