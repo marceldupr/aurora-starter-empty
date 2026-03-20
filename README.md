@@ -106,11 +106,14 @@ const caps = await client.capabilities();
 | `client.store.homePersonalization(sessionId)` | Holmes-driven home (hero + sections, `quickActions`, `missions`, `shoppingListTemplates`). Returns `activeMission` when inference ≥ 0.6: `{ key, label, confidence, band, summary, uiHints }` — use for mission bar, catalogue narrowing. |
 | `client.store.holmesRecipe(slug)` | Cached recipe; AI fetch on miss. |
 | `client.store.holmesTidbits(entity, entityType?)` | Tidbits for recipes, ingredients, products. |
-| `client.store.holmesContextualHint({ sid, cartNames, currentProduct })` | "Paying attention" hint + product links. Guardrail rules (e.g. stir-fry + spaghetti → egg noodles) power micro-learning insights. |
+| `client.store.holmesContextualHint({ sid, cartNames, cartIds?, currentProduct })` | "Paying attention" hint + product links; optional `cartIds` for bundle detection (`hasCombo`, `comboTitle`). Guardrail rules power micro-learning. |
+| `client.store.holmesCombosForCart({ cartIds, cartNames?, limit? })` | Bundle options for cart (2+ items). SDK 0.2.22+. |
+| `client.store.holmesSelectCombo({ sid, slug, title? })` | Persist selected combo on Holmes session. SDK 0.2.22+. |
 | `client.store.categorySuggestions(sid)` | Holmes-driven category order. |
-| `client.store.holmesRecipeProducts(recipe, limit?)` | Products for a recipe (paella, curry, pasta). |
+| `client.store.holmesComboProducts(combo, limit?)` | Products for a combo (canonical). |
+| `client.store.holmesRecipeProducts(recipe, limit?)` | Ecom alias for `holmesComboProducts`. |
 | `client.store.holmesGoesWith(productId, limit?)` | Products that go well with a given product. |
-| `client.store.holmesRecentRecipes(limit?)` | Recent recipes for discovery. |
+| `client.store.holmesRecentCombos(limit?)` / `holmesRecentRecipes` | Recent combos for discovery. |
 | `client.store.checkout.sessions.create(params)` | Create checkout session (Stripe or ACME). |
 
 ### Holmes APIs (when `features.holmes` is true)
